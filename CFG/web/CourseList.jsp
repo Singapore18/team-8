@@ -11,33 +11,26 @@
 
 <div class="container" style="width: 100%;">
     <ul id="courses" class="list-group" style="padding-top: 100px; padding-bottom: 100px; align-content: center;">
-        <li class="list-group-item list-group-item-action">Cras justo odio</li>
-        <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
-        <li class="list-group-item list-group-item-action">Morbi leo risus</li>
-        <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
-        <li class="list-group-item list-group-item-action   ">Vestibulum at eros</li>
     </ul>
 </div>
 
 <script>
     $(document).ready(function () {
-        $('.list-group-item').on('click', function () {
-            course_selected = $(this).text();
-            window.location.href = 'Questionaire.jsp?course=' + course_selected;
-        });
-
         baseUrl = 'https://cfgtestdrive.firebaseio.com/Courses.json';
-        $('#courses').empty();
         $.get(baseUrl).then(displayCourses);
     });
-    
-    function displayCourses(courses){
+
+    function displayCourses(courses) {
         let keys = Object.keys(courses);
-        for(let key of keys){
+        for (let key of keys) {
             let course = courses[key];
-            if(course.Description){
-                $('#courses').append('<li class="list-group-item list-group-item-action" id='+ course.ID + '>' + course.Description + '</li>');
+            if (course.Description) {
+                $('#courses').append('<button onclick="accessSurvey(this)" class="btn btn-default survey-link" id='+ course.ID +' style="width: 500px; height: 50px; padding-bottom: 30px;">' + course.Description + '</button><br/>');
             }
         }
+    }
+    
+    function accessSurvey(course){
+        window.location.href = 'Questionaire.jsp?course=' + course.id;
     }
 </script>
