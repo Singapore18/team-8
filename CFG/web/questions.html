@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Survey Questions</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="http://static.mindmup.com/img/favicon.ico">
+  <link href="external/google-code-prettify/prettify.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+  <script src="external/google-code-prettify/prettify.js"></script>
+  <link href="questions.css" rel="stylesheet">
+  <script src="mindmup-editabletable.js"></script>
+  <script src="numeric-input-example.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="hero-unit">
+      <h1>Survey Questions</h1>
+
+      <div class="alert alert-error hide">
+        Alert
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+          apiKey: "AIzaSyBnuIGVLDRzsKk7ppsisiBSAUQnAgm5c-I",
+          authDomain: "cfgtestdrive.firebaseapp.com",
+          databaseURL: "https://cfgtestdrive.firebaseio.com",
+          projectId: "cfgtestdrive",
+          storageBucket: "cfgtestdrive.appspot.com",
+          messagingSenderId: "234489321502",
+        };
+        firebase.initializeApp(config);
+      </script>
+
+      <script>
+        var database = firebase.database().ref().child('Question');
+        database.once('value', function (snapshot) {
+          if (snapshot.exists()) {
+            console.log('EXIST');
+            var content = '';
+            snapshot.forEach(function (data) {
+              var keyid = data.val().keyid;
+              var maxrat = data.val().maxrat;
+              var metid = data.val().metid;
+              var minrat = data.val().minrat;
+              var text = data.val().text;
+              var type = data.val().type;
+              content += '<tr>';
+              content += '<td>' + keyid + '</td>'; //column1
+              content += '<td>' + metid + '</td>';//column2
+              content += '<td>' + minrat + '</td>'; //column3
+              content += '<td>' + maxrat + '</td>';//column4
+              content += '<td>' + text + '</td>'; //column5
+              content += '<td>' + type + '</td>';//column6
+              content += '</tr>';
+            });
+            $('#mainTable').append(content);
+          }
+        });
+      </script>
+
+      <table id="mainTable" class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Keystone ID</th>
+            <th>Metric ID</th>
+            <th>Lowest Score</th>
+            <th>Highest Score</th>
+            <th>Question</th>
+            <th>Question Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="tr">
+            <td id="keyid"></td>
+            <td id="metid"></td>
+            <td id="minrat"></td>
+            <td id="maxrat"></td>
+            <td id="text"></td>
+            <td id="type"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <script>
+        $('#mainTable').editableTableWidget({ editor: $('<textarea>') }).numericInputExample().find('td:first').focus();
+        $('#textAreaEditor').editableTableWidget({ editor: $('<textarea>') });
+        window.prettyPrint && prettyPrint();
+      </script>
+    </div>
+
+</body>
+
+</html>
