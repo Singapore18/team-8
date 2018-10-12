@@ -13,7 +13,12 @@
                 <a class="nav-link" href="CourseList.jsp">Course Lists</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="results.jsp">Results</a>
+                <a class="nav-link" href="StudentProfile.html">Course Results</a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" href="studentlist.html">Class Results</a>
+            </li>             <li class="nav-item">
+                <a class="nav-link" href="questions.html">Admin</a>
             </li>
         </ul>
     </div>

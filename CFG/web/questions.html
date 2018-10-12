@@ -92,7 +92,6 @@
               content += '</tr>';
             });
             $('#mainTable').append(content);
-            alert("hi");
             $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
             $('#textAreaEditor').editableTableWidget({ editor: $('<textarea>') });
             window.prettyPrint && prettyPrint();
@@ -108,7 +107,6 @@
     </div>
 
     <div id="app">
-      <h1> learning numbers</h1>
       <input v-model.trim="newTodoText" @keyup.enter="addTodo" placeholder="Add new todo">
       <ul>
         <li v-for="todo in todos">

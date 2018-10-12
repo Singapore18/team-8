@@ -1,6 +1,8 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 <!------ Include the above in your HEAD tag ---------->
 
 <style>
@@ -51,7 +53,7 @@
                             <input type="checkbox" class="form-check-input">
                             <small>Remember Me</small>
                         </label>
-                        <button type="submit" class="btn btn-login float-right">Submit</button>
+                        <button type="submit" id="submit" class="btn btn-login float-right"><a href="http://localhost:8084/CFG/CourseList.jsp">Submit</a></button>
                     </div>
 
                 </form>
@@ -75,3 +77,9 @@
             </div>
         </div>
 </section>
+                            <script>
+// onclick event is assigned to the #button element.
+document.getElementById("submit").onclick = function() {
+  window.location.href = "http://localhost:8084/CFG/CourseList.jsp";
+};
+</script>
