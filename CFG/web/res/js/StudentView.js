@@ -40,8 +40,8 @@ var chart2 = new CanvasJS.Chart("chartDoughnut",
                                         {
                                             type: "doughnut",
                                             dataPoints: [
-                                                {  y: 53, indexLabel: "Potivite" },
-                                                {  y: 35, indexLabel: "Negative" },
+                                                {  y: 53, indexLabel: "Increased" },
+                                                {  y: 35, indexLabel: "Decreased" },
                                                 {  y: 12, indexLabel: "Static" }
                                             ]
                                         }
