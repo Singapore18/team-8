@@ -3,10 +3,10 @@ $.fn.editableTableWidget = function (options) {
 	'use strict';
 	return $(this).each(function () {
 		var buildDefaultOptions = function () {
-				var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
-				opts.editor = opts.editor.clone();
-				return opts;
-			},
+			var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
+			opts.editor = opts.editor.clone();
+			return opts;
+		},
 			activeOptions = $.extend(buildDefaultOptions(), options),
 			ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9,
 			element = $(this),
@@ -80,43 +80,43 @@ $.fn.editableTableWidget = function (options) {
 				}
 			}
 		})
-		.on('input paste', function () {
-			var evt = $.Event('validate');
-			active.trigger(evt, editor.val());
-			if (evt.result === false) {
-				editor.addClass('error');
-			} else {
-				editor.removeClass('error');
-			}
-		});
+			.on('input paste', function () {
+				var evt = $.Event('validate');
+				active.trigger(evt, editor.val());
+				if (evt.result === false) {
+					editor.addClass('error');
+				} else {
+					editor.removeClass('error');
+				}
+			});
 		element.on('click keypress dblclick', showEditor)
-		.css('cursor', 'pointer')
-		.keydown(function (e) {
-			var prevent = true,
-				possibleMove = movement($(e.target), e.which);
-			if (possibleMove.length > 0) {
-				possibleMove.focus();
-			} else if (e.which === ENTER) {
-				showEditor(false);
-			} else if (e.which === 17 || e.which === 91 || e.which === 93) {
-				showEditor(true);
-				prevent = false;
-			} else {
-				prevent = false;
-			}
-			if (prevent) {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-		});
+			.css('cursor', 'pointer')
+			.keydown(function (e) {
+				var prevent = true,
+					possibleMove = movement($(e.target), e.which);
+				if (possibleMove.length > 0) {
+					possibleMove.focus();
+				} else if (e.which === ENTER) {
+					showEditor(false);
+				} else if (e.which === 17 || e.which === 91 || e.which === 93) {
+					showEditor(true);
+					prevent = false;
+				} else {
+					prevent = false;
+				}
+				if (prevent) {
+					e.stopPropagation();
+					e.preventDefault();
+				}
+			});
 
 		element.find('td').prop('tabindex', 1);
 
 		$(window).on('resize', function () {
 			if (editor.is(':visible')) {
 				editor.offset(active.offset())
-				.width(active.width())
-				.height(active.height());
+					.width(active.width())
+					.height(active.height());
 			}
 		});
 	});
@@ -124,8 +124,7 @@ $.fn.editableTableWidget = function (options) {
 };
 $.fn.editableTableWidget.defaultOptions = {
 	cloneProperties: ['padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
-					  'text-align', 'font', 'font-size', 'font-family', 'font-weight',
-					  'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
+		'text-align', 'font', 'font-size', 'font-family', 'font-weight',
+		'border', 'border-top', 'border-bottom', 'border-left', 'border-right'],
 	editor: $('<input>')
 };
-

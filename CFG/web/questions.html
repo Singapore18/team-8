@@ -18,7 +18,7 @@
   <link href="questions.css" rel="stylesheet">
   <script src="mindmup-editabletable.js"></script>
   <script src="numeric-input-example.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+  <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
 
 </head>
 
@@ -46,6 +46,29 @@
         firebase.initializeApp(config);
       </script>
 
+      <table id="mainTable" class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Keystone ID</th>
+            <th>Metric ID</th>
+            <th>Lowest Score</th>
+            <th>Highest Score</th>
+            <th>Question</th>
+            <th>Question Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="keyid"></td>
+            <td id="metid"></td>
+            <td id="minrat"></td>
+            <td id="maxrat"></td>
+            <td id="text"></td>
+            <td id="type"></td>
+          </tr>
+        </tbody>
+      </table>
+
       <script>
         var database = firebase.database().ref().child('Question');
         database.once('value', function (snapshot) {
@@ -69,39 +92,67 @@
               content += '</tr>';
             });
             $('#mainTable').append(content);
+            alert("hi");
+            $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+            $('#textAreaEditor').editableTableWidget({ editor: $('<textarea>') });
+            window.prettyPrint && prettyPrint();
           }
         });
-      </script>
 
-      <table id="mainTable" class="table table-striped">
-        <thead class="thead-inverse">
-          <tr>
-            <th>Keystone ID</th>
-            <th>Metric ID</th>
-            <th>Lowest Score</th>
-            <th>Highest Score</th>
-            <th>Question</th>
-            <th>Question Type</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="tr">
-            <td id="keyid"></td>
-            <td id="metid"></td>
-            <td id="minrat"></td>
-            <td id="maxrat"></td>
-            <td id="text"></td>
-            <td id="type"></td>
-          </tr>
-        </tbody>
-      </table>
+      </script>
 
       <script>
-        $('#mainTable').editableTableWidget({ editor: $('<textarea>') }).numericInputExample().find('td:first').focus();
-        $('#textAreaEditor').editableTableWidget({ editor: $('<textarea>') });
-        window.prettyPrint && prettyPrint();
+
       </script>
+
     </div>
+
+    <div id="app">
+      <h1> learning numbers</h1>
+      <input v-model.trim="newTodoText" @keyup.enter="addTodo" placeholder="Add new todo">
+      <ul>
+        <li v-for="todo in todos">
+          <input :value="todo.text" @input="updateTodoText(todo, $event.target.value)">
+          <button @click="removeTodo(todo)">X</button>
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+
+    <script>
+      var db = firebase.initializeApp({
+        databaseURL: 'https://cfgtestdrive.firebaseio.com'
+      }).database()
+      var qnDb = db.ref().child('Question');
+      new Vue({
+        el: '#app',
+        data: {
+          qnText: ''
+        },
+        firebase: {
+          todos: qnDb.limitToLast(25)
+        },
+        methods: {
+          addTodo: function () {
+            if (this.qnText) {
+              qnDb.push({
+                text: this.qnText
+              })
+              this.qnText = ''
+            }
+          },
+          updateTodoText: function (todo, newText) {
+            qnDb.child(todo['.key']).child('text').set(newText)
+          },
+          removeTodo: function (todo) {
+            qnDb.child(todo['.key']).remove()
+          }
+        }
+      })
+    </script>
 
 </body>
 
