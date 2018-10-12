@@ -12,23 +12,21 @@ var chart1 = new CanvasJS.Chart("chartBar",
                                           {
                                               type: "bar",
                                               dataPoints: [
-                                                  { y: 198, label: "Growth-Orientedness"},
-                                                  { y: 201, label: "Confidence"},
-                                                  { y: 202, label: "Strategic Thinking"},
-                                                  { y: 236, label: "Great Britain"},
-                                                  { y: 395, label: "Soviet Union"},
-                                                  { y: 957, label: "USA"}
+                                                  { y: 12, label: "Growth-Orientedness"},
+                                                  { y: 9, label: "Confidence"},
+                                                  { y: 2, label: "Strategic Thinking"},
+                                                  { y: 23, label: "Team Orientedness"},
+                                                  { y: 16, label: "Personal Productivity"}
                                               ]
                                           },
                                           {
                                               type: "bar",
                                               dataPoints: [
-                                                  { y: 166, label: "Italy"},
-                                                  { y: 144, label: "China"},
-                                                  { y: 223, label: "France"},
-                                                  { y: 272, label: "Great Britain"},
-                                                  { y: 319, label: "Soviet Union"},
-                                                  { y: 759, label: "USA"}
+                                                  { y: 3, label: "Growth-Orientedness"},
+                                                  { y: 7, label: "Confidence"},
+                                                  { y: 23, label: "Strategic Thinking"},
+                                                  { y: 22, label: "Team Orientedness"},
+                                                  { y: 19, label: "Personal Productivity"}
                                               ]
                                           }]
                                   });

@@ -30,8 +30,8 @@
         $('#courses').empty();
         $.get(baseUrl).then(displayCourses);
     });
-    
-    function displayCourses(courses){
+
+    function displayCourses(courses) {
         let keys = Object.keys(courses);
         for(let key of keys){
             let course = courses[key];
