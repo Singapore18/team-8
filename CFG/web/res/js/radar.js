@@ -9,7 +9,7 @@ window.onload = function() {
         },
 
         data: [{
-            type: "pie",
+            type: "",
             startAngle: 45,
             showInLegend: "true",
             legendText: "{label}",
