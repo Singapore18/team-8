@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%
+    String courseSelected = request.getParameter("course");
+%>
 <html>
     <head>
         <title>Bootstrap theme, jQuery Survey Library Example</title>
